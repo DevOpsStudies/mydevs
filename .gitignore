@@ -11,6 +11,8 @@
 /node_modules
 # .git
 /.git
+/.gitignor
+
 #terraform files&backup
 /terraform.exe
 /.gcloud

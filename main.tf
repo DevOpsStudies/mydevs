@@ -36,7 +36,7 @@ resource "google_compute_instance" "default"{
 			//Ephemeral ip 
 		}
 	 }
- metadata_startup_script = "echo 'file("./scripts/install-vm.sh")' > /var/cache/ip-address.txt" 
+ metadata_startup_script = "echo 'file("./DevOps/Terraform/scripts/install-vm.sh")' > /var/cache/ip-address.txt" 
  metadata = { 
 	ssh-keys = "SerJioSh:var.ssh_key_pub"
  }

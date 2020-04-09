@@ -1,6 +1,7 @@
 variable "github_token" {
 	description = " used token to access github"
-	default = "c61e74979ca6367a5ca2e95c26526e91c6988f3b"
+	type = string	
+	//default = "./keys.json"
 }
 
 variable "github_organization" {

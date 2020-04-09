@@ -12,9 +12,12 @@
 # .git
 /.git
 /.gitignore
-
+# keys json
+/keys.json
 #terraform files&backup
 /terraform.exe
+/*.tfvars
+
 /.gcloud
 /.ssh
 /.terraform

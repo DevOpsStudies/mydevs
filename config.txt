@@ -1,0 +1,61 @@
+version: '2'
+
+services: 
+  mysql:
+    image: mariadb 
+    restart: always 
+    volumes:
+      - ./databases:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/scheta.sql;ro
+environment:
+- MYSQL ROOT PASSWORD "password"
+ports:
+  - 3367:3366" mailserver:
+	image: 'dkadevelop/mailserver:latest'
+volum:
+   ./exim/exim4.conf:/etc/exiiH/exliM.conf
+   - ./dovecot/dovecot.conf:/etc/dovecot/dovecot.conf
+   - ./dovecot/dovecot-sql.conf:/etc/dovecot/dovecot-sql.conf
+   - ./vmaib/var/vmail
+ports:
+   - '8080:80' fomnand: /usr/bln/siipervlsord tty: true stdin open: true
+
+--- #method 1
+- hosts: all
+
+  tasks:
+    - name: install Apache2
+      command: yum install --quiet -y httpd-devel
+    - name: Copy configuration files.
+      command: >
+        cp httpd.conf /etc/httpd/conf/httpd.conf
+    - command: >
+        cp httpd-vhosts.conf /etc/httpd/conf/httpd-vhosts.conf
+    - name: Start Apache and configure it to run at boot.
+      command: service httpd start
+    - command: chkconfig httpd on
+
+--- # method 2
+- hosts: all
+
+  tasks:
+    - name: install Apache2
+      yum:
+        name:
+          - httpd
+          - httpd-devel
+        state: present
+    - name: Copy configuration files.
+      copy:
+        src:"{{items.src}}"
+        dest: "{{item.dest}}"
+        omner: root
+        group: root
+        mode: 0644
+      with_items:
+          - src: httpd.conf
+            dest: /etc/httpd/conf/httpd.conf
+          - src: httpd-vhosts.conf
+            dest: /etc/httpd/conf/httpd-vhosts.conf
+    - name:
+      service: name=httpd state=started enabled=yes

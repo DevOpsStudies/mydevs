@@ -1,0 +1,58 @@
+---- # method 3
+	#install apache2
+	#yum install --quiet -y httpd-devel
+	#copy configuration files
+	#cp httpd.conf /etc/httpd/conf/httpd.conf
+	#cp httpd-vhosts.conf /etc/httpd/conf/httpd-vhosts.conf
+	#StartApacheAndConfigureItToRunAtBoot.
+	#servicehttpdstart
+	#chkconfig httpd on
+--- # method 4
+- hosts: all
+  become: yes
+  tasks:
+    - name: Get software for apt repos manage.
+      apt:
+        name:
+          -python-apt
+          -python-pycurl
+        state: present
+
+    -name: Add repository for later version PHP.
+      apt_repository:
+        validate_certs: no
+        repo: 'ppa:ondrej/php'
+        state: present
+      apt_repository: repo='ppa:ondrej/php' update_cache=yes
+
+    -name: "Install Apache,MySQL,PHP,and other dependencies."]
+      apt:
+        name:
+          - git
+          - curl
+          - unzip
+          - sendmai1
+          - apache2
+          - php7.1-common
+          - php7.1-cli
+          - php7.1-dev
+          - php7.1-gd
+          - php7.1-curl
+          - php7.1-json
+          - php7.1-opcache
+          - php7.1-xml
+          - php7.1-mbstring
+          - php7.1-pdo
+          - php7.1-mysql
+          - php-apcu
+          - 1ibpcre3-dev
+          - 1ibapache2-mod-php7.1
+          - python-mysqldb
+          - mysql-server
+        state: present
+
+    -name: Disable the firewall (since this is for local dev only).
+     service: "name={{item}} state=started enabled=yes"
+     with_items:
+       - apache2
+       - mysql

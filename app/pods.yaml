@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: srv-tomcat
+  name: appli-ku 
   labels:
-    app: srv-tomcat #tier: srv_tomcat
+    app: appli-ku #tier: srv_tomcat
 spec:
   containers:
   - name: env-tomcat
@@ -30,5 +30,5 @@ spec:
   volumes:
   - name: nginx-proxy-config
     configMap:
-      name: srv-tomcat-nginx-conf
+      name: appli-ku-nginx-conf
       

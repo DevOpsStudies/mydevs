@@ -11,5 +11,5 @@ spec:
       paths:
       #- path: "/"
       - backend:
-          serviceName: appli-ku
+          serviceName: appli-ku-svc-lb
           servicePort: 80

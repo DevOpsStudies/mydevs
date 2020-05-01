@@ -4,11 +4,11 @@ kind: Pod
 metadata:
   name: appli-ku 
   labels:
-    app: appli-ku #tier: srv_tomcat
+    app: appli-ku
 spec:
   containers:
   - name: env-tomcat
-    image: eu.gcr.io/devops-p/docker
+    image: gcr.io/devops-274919/tomcat
   - name: server
     image: eu.gcr.io/juice-shop-project/nginx:v1
     ports:
@@ -19,16 +19,16 @@ spec:
     resources:      
       limits:
         cpu: "1"
-        memory: "500Mi"
+        memory: "700Mi"
       requests:
-        cpu: 250m
-        memory: "300Mi"
+        cpu: 150m
+        memory: "400Mi"
     volumeMounts:
-    - name: nginx-proxy-config
+    - name: appli-ku-nginx-conf
       mountPath: /etc/nginx/nginx.conf
       subPath: nginx.conf
   volumes:
-  - name: nginx-proxy-config
+  - name: appli-ku-nginx-conf
     configMap:
       name: appli-ku-nginx-conf
       

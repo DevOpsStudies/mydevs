@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: appli-ku-deployment 
+  name: appli-ku-deploying 
   labels:
     app: appli-ku 
 spec:
@@ -18,14 +18,34 @@ spec:
   template:
     metadata:
       labels:
-        app: appli-ku #nginx-1
+        app: appli-ku 
     spec:
       containers:
-      - name: env-tomcat #nginx-2
-        image: gcr.io/devops-274919/tomcat
+      - name: env-tomcat 
+        image: gcr.io/devops-274919/tomcat #eu.gcr.io/devops-p/docker
+     #  env:
+      #   - name: T_ENV_V1
+      #     value: T_VAL_v1
+      #   - name: T_ENV_V2
+      #     value: T_VAL_V2
         #ports:
-        #- containerPort: 8080
+        #- containerPort: 8090
       - name: server #nginx-1
         image: eu.gcr.io/juice-shop-project/nginx:v1
         ports:
         - containerPort: 80
+        resources:      
+          limits:
+            cpu: "1"
+            memory: "600Mi"
+          requests:
+            cpu: 150m
+            memory: "400Mi"
+        volumeMounts:
+        - name: nginx-proxy-config  #appli-ku-nginx-conf 
+          mountPath: /etc/nginx/nginx.d
+          subPath: nginx.conf
+      volumes:
+      - name: nginx-proxy-config # nginx-proxy-config
+        configMap:
+          name: appli-ku-nginx-conf

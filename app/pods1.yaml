@@ -23,12 +23,14 @@ spec:
       requests:
         cpu: 150m
         memory: "400Mi"
+    #command: ["/bin/sh", "-c", "ls /etc/nginx/"]
     volumeMounts:
-    - name: appli-ku-nginx-conf
+    - name: nginx-proxy-config
       mountPath: /etc/nginx/nginx.conf
       subPath: nginx.conf
   volumes:
-  - name: appli-ku-nginx-conf
+  - name: nginx-proxy-config
     configMap:
       name: appli-ku-nginx-conf
+  #restartPolicy: Never
       

@@ -10,15 +10,15 @@ spec:
   selector:
     app: appli-ku
   ports:
-   # - protocol: TCP
-    #  name: http
-     # port: 80  
-     # targetPort: 80
     - protocol: TCP
+      name: http
+      port: 80  
+      targetPort: 80
+    - name: http-tomcat
+      protocol: TCP
       port: 8090  
       targetPort: 80
-    - protocol: TCP
-     # name: https
+    - name: https
+      protocol: TCP
       port: 443
-      targetPort: 443
-  
+      targetPort: 443 
